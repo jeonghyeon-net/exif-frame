@@ -23,6 +23,28 @@ export interface ThemeListResponse {
   themes: ThemeRecord[];
 }
 
+export async function searchThemes(params?: {
+  ownerMemberId?: number;
+  ids?: number[];
+  title?: string;
+  sort?: 'downloadCount' | 'id';
+  order?: 'asc' | 'desc';
+  page?: number;
+  pageSize?: number;
+}): Promise<ThemeListResponse> {
+  const search = new URLSearchParams();
+  if (params?.ownerMemberId != null) search.set('ownerMemberId', String(params.ownerMemberId));
+  if (params?.ids && params.ids.length) search.set('ids', params.ids.join(','));
+  if (params?.title) search.set('title', params.title);
+  if (params?.sort) search.set('sort', params.sort);
+  if (params?.order) search.set('order', params.order);
+  if (params?.page) search.set('page', String(params.page));
+  if (params?.pageSize) search.set('pageSize', String(params.pageSize));
+  const res = await fetch(`${API_BASE}/api/themes${search.toString() ? `?${search.toString()}` : ''}`);
+  if (!res.ok) throw new Error('Failed to search themes');
+  return (await res.json()) as ThemeListResponse;
+}
+
 export async function fetchTheme(id: number): Promise<{ success: boolean; theme: ThemeRecord }> {
   const res = await fetch(`${API_BASE}/api/themes/${id}`);
   if (!res.ok) throw new Error('Failed to fetch theme');
@@ -95,4 +117,13 @@ export async function deleteTheme(token: string, id: number): Promise<{ success:
     throw new Error(data?.error || 'Failed to delete theme');
   }
   return data as { success: boolean };
+}
+
+export async function incrementDownload(id: number): Promise<{ success: boolean; downloadCount: number }> {
+  const res = await fetch(`${API_BASE}/api/themes/${id}/download`, { method: 'POST' });
+  const data = (await res.json()) as any;
+  if (!res.ok || data?.success !== true) {
+    throw new Error(data?.error || 'Failed to update download count');
+  }
+  return data as { success: boolean; downloadCount: number };
 }

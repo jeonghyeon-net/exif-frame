@@ -1,9 +1,11 @@
-import { Block, BlockTitle, Button, List, ListInput, ListItem, Navbar, NavbarBackLink, Page } from 'konsta/react';
+import { Block, BlockTitle, Button, List, ListInput, ListItem, Navbar, NavbarBackLink, Page, Toast, Preloader } from 'konsta/react';
+import { RiImageLine } from 'react-icons/ri';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { deleteTheme, fetchTheme, ThemeRecord, updateTheme, uploadThemePreview } from '../../../api/themes';
 import { useAuthStore } from '../../../state/auth.store';
+ 
 
 const ThemeDetailPage = () => {
   const { t } = useTranslation();
@@ -24,11 +26,14 @@ const ThemeDetailPage = () => {
   const [assets, setAssets] = useState('');
   const [assetsError, setAssetsError] = useState<string | null>(null);
   const [deleting, setDeleting] = useState(false);
+  const [savedToast, setSavedToast] = useState(false);
+  const [uploadedToast, setUploadedToast] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [uploading, setUploading] = useState(false);
 
   const isOwner = !!(theme && me && theme.ownerMemberId === me.id);
+  
 
   const load = async () => {
     try {
@@ -66,6 +71,8 @@ const ThemeDetailPage = () => {
       }
       await updateTheme(token, theme.id, { title, description, svg, assets });
       await load();
+      setSavedToast(true);
+      setTimeout(() => setSavedToast(false), 1500);
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Failed to save');
     } finally {
@@ -86,6 +93,8 @@ const ThemeDetailPage = () => {
       setUploading(true);
       await uploadThemePreview(token, theme.id, file);
       await load();
+      setUploadedToast(true);
+      setTimeout(() => setUploadedToast(false), 1500);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to upload preview');
     } finally {
@@ -111,6 +120,8 @@ const ThemeDetailPage = () => {
       <input ref={fileInputRef} type="file" accept="image/jpeg" onChange={onFileChange} hidden />
       <Page>
         <Navbar title={t('my-themes')} left={<NavbarBackLink text={t('back')} onClick={() => navigate(-1)} />} />
+        <Toast opened={savedToast}>{t('saved')}</Toast>
+        <Toast opened={uploadedToast}>{t('preview-uploaded')}</Toast>
 
         {error ? (
           <Block strong inset>
@@ -120,6 +131,8 @@ const ThemeDetailPage = () => {
 
         {theme ? (
           <>
+            {/* Edit-only content: download controls removed */}
+
             <BlockTitle>{t('title')}</BlockTitle>
             <List strongIos inset>
               <ListInput type="text" value={title} onChange={(e) => setTitle((e.target as HTMLInputElement).value)} disabled={!isOwner} />
@@ -133,11 +146,12 @@ const ThemeDetailPage = () => {
             <BlockTitle>{t('upload-preview')}</BlockTitle>
             <List strongIos inset>
               <ListItem
-                media={theme.previewImageUrl ? <img src={theme.previewImageUrl} alt="preview" width={44} height={44} /> : undefined}
+                media={theme.previewImageUrl ? <img src={theme.previewImageUrl} alt="preview" width={44} height={44} /> : <RiImageLine size={28} />}
                 title={theme.previewImageUrl ? t('change') : t('upload')}
                 link={isOwner && !uploading}
                 onClick={isOwner && !uploading ? onPickPreview : undefined}
               />
+              {uploading ? <ListItem title={t('uploading')} after={<Preloader />} /> : null}
             </List>
 
             <BlockTitle>{t('svg')}</BlockTitle>

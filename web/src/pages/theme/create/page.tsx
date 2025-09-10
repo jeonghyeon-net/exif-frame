@@ -23,8 +23,8 @@ const ThemeCreatePage = () => {
     try {
       setCreating(true);
       setError(null);
-      const res = await createTheme(token, { title: title.trim(), description: description.trim(), svg: svg.trim(), assets: assets.trim() });
-      navigate(`/themes/${res.id}`);
+      await createTheme(token, { title: title.trim(), description: description.trim(), svg: svg.trim(), assets: assets.trim() });
+      navigate(-1);
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Failed to create');
     } finally {
