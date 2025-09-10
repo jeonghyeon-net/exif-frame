@@ -32,6 +32,19 @@ export class ThemeDelete extends OpenAPIRoute {
       id
     );
     if (!existing || existing.ownerMemberId !== userId) return c.json({ success: false, error: 'Forbidden' }, 403);
+    // Best-effort: delete all objects under the theme folder in R2
+    try {
+      const prefix = `themes/${id}/`;
+      let cursor: string | undefined = undefined;
+      do {
+        const res = await c.env.R2.list({ prefix, cursor });
+        const keys = res.objects?.map((o) => o.key) ?? [];
+        if (keys.length > 0) await c.env.R2.delete(keys);
+        cursor = res.truncated ? res.cursor : undefined;
+      } while (cursor);
+    } catch (e) {
+      // ignore storage deletion errors
+    }
     await run(c.env.DB, `DELETE FROM themes WHERE id = ?`, id);
     return { success: true };
   }
