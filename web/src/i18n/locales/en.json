@@ -84,4 +84,5 @@
   , "none": "None"
   , "creator": "Creator"
   , "details": "Details"
+  , "please-select-theme-in-library": "Please select a theme in the Library."
 }

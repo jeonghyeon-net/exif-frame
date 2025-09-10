@@ -18,6 +18,10 @@ export const PicturesGrid = () => {
   if (!pictures || pictures.length === 0) return <></>;
 
   const handlePictureClick = async (picture: Picture) => {
+    if (!svg || svg.trim().length === 0) {
+      alert(t('please-select-theme-in-library'));
+      return;
+    }
     setLoading(true);
     try {
       const dumpedExifMetadata = maintainExifMetadata ? await dumpExifMetadata(await picture.loadDataUrl()) : null;

@@ -18,6 +18,10 @@ export const DownloadAllPicturesButton = () => {
 
   const handleClick = async () => {
     if (!pictures || pictures.length === 0) return;
+    if (!svg || svg.trim().length === 0) {
+      alert(t('please-select-theme-in-library'));
+      return;
+    }
     setLoading(true);
     try {
       const fileExtension = webpMode ? 'webp' : 'jpeg';
