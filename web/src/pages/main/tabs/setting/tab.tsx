@@ -9,6 +9,7 @@ import GitHubListItem from './components/open-github.list-item';
 import SponsorsListItem from './components/sponsors.list-item';
 import { useTranslation } from 'react-i18next';
 import DiscordListItem from './components/discord-list-item';
+import AuthListItem from './components/auth.list-item';
 
 export const SettingTab = () => {
   const { t } = useTranslation();
@@ -16,6 +17,10 @@ export const SettingTab = () => {
   return (
     <>
       <Navbar title={t('setting')} />
+
+      <List strongIos inset>
+        <AuthListItem />
+      </List>
 
       <List strongIos inset>
         <DarkModeListItem />

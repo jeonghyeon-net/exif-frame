@@ -1,5 +1,6 @@
 import { fromHono } from "chanfana";
 import { Hono } from "hono";
+import { cors } from "hono/cors";
 // Endpoints
 import { AuthLogin } from "./endpoints/authLogin";
 import { AuthRegister } from "./endpoints/authRegister";
@@ -23,6 +24,13 @@ const app = new Hono<{ Bindings: Env }>();
 const openapi = fromHono(app, {
   docs_url: "/",
 });
+
+// Enable CORS for all routes
+app.use("*", cors({
+  origin: "*",
+  allowMethods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowHeaders: ["Content-Type", "Authorization"],
+}));
 
 // Register OpenAPI endpoints
 // Auth

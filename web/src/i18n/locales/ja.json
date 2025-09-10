@@ -19,4 +19,22 @@
   "N-photos-have-been-loaded": "{N}枚の写真が読み込まれました。",
   "wait-a-moment": "少々お待ちください...",
   "photo-conversion-error": "写真の変換中にエラーが発生しました。"
+  , "back": "戻る"
+  , "login": "ログイン"
+  , "register": "新規登録"
+  , "logout": "ログアウト"
+  , "my-info": "マイ情報"
+  , "register-or-login": "新規登録 または ログイン"
+  , "email": "メール"
+  , "password": "パスワード"
+  , "nickname": "ニックネーム"
+  , "login-with-email": "メールでログイン"
+  , "enter-info": "情報を入力"
+  , "min-8-chars": "最低8文字"
+  , "logging-in": "ログイン中..."
+  , "registering": "登録中..."
+  , "dont-have-account": "アカウントをお持ちでないですか？"
+  , "already-have-account": "すでにアカウントをお持ちですか？"
+  , "login-failed": "ログインに失敗しました"
+  , "register-failed": "登録に失敗しました"
 }

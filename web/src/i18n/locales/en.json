@@ -19,4 +19,22 @@
   "N-photos-have-been-loaded": "{N} photos have been loaded.",
   "wait-a-moment": "Wait a moment...",
   "photo-conversion-error": "An error occurred during photo conversion."
+  , "back": "Back"
+  , "login": "Login"
+  , "register": "Register"
+  , "logout": "Logout"
+  , "my-info": "My Info"
+  , "register-or-login": "Register or Login"
+  , "email": "Email"
+  , "password": "Password"
+  , "nickname": "Nickname"
+  , "login-with-email": "Sign in with Email"
+  , "enter-info": "Enter your information"
+  , "min-8-chars": "Minimum 8 characters"
+  , "logging-in": "Logging in..."
+  , "registering": "Registering..."
+  , "dont-have-account": "Don’t have an account?"
+  , "already-have-account": "Already have an account?"
+  , "login-failed": "Login failed"
+  , "register-failed": "Registration failed"
 }

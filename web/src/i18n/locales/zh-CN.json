@@ -19,4 +19,22 @@
   "N-photos-have-been-loaded": "已加载 {N} 张照片。",
   "wait-a-moment": "请稍候...",
   "photo-conversion-error": "照片转换时发生错误。"
+  , "back": "返回"
+  , "login": "登录"
+  , "register": "注册"
+  , "logout": "登出"
+  , "my-info": "我的信息"
+  , "register-or-login": "注册或登录"
+  , "email": "邮箱"
+  , "password": "密码"
+  , "nickname": "昵称"
+  , "login-with-email": "使用邮箱登录"
+  , "enter-info": "输入信息"
+  , "min-8-chars": "至少 8 个字符"
+  , "logging-in": "正在登录..."
+  , "registering": "正在注册..."
+  , "dont-have-account": "还没有账号？"
+  , "already-have-account": "已有账号？"
+  , "login-failed": "登录失败"
+  , "register-failed": "注册失败"
 }

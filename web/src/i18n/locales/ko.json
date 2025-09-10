@@ -19,4 +19,22 @@
   "N-photos-have-been-loaded": "{N}장의 사진이 로드되었습니다.",
   "wait-a-moment": "잠시만 기다려 주세요...",
   "photo-conversion-error": "사진 변환 중 오류가 발생했습니다."
+  , "back": "뒤로"
+  , "login": "로그인"
+  , "register": "회원가입"
+  , "logout": "로그아웃"
+  , "my-info": "내 정보"
+  , "register-or-login": "회원가입 또는 로그인"
+  , "email": "이메일"
+  , "password": "비밀번호"
+  , "nickname": "닉네임"
+  , "login-with-email": "이메일로 로그인"
+  , "enter-info": "정보 입력"
+  , "min-8-chars": "최소 8자"
+  , "logging-in": "로그인 중..."
+  , "registering": "가입 중..."
+  , "dont-have-account": "아직 계정이 없나요?"
+  , "already-have-account": "이미 계정이 있나요?"
+  , "login-failed": "로그인에 실패했습니다."
+  , "register-failed": "회원가입에 실패했습니다."
 }
